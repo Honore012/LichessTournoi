@@ -27,6 +27,7 @@ onAuthStateChanged(auth, async (user) => {
       div.innerHTML = `
   <div class="user-entry">
     <strong>${data.username}</strong>
+    ${data.isOnline ? `<span class="online-dot"></span>` : ""}
     ${data.newMessages > 0 ? `<span class="badge">${data.newMessages}</span>` : ""}
     <br/>
     <small>${data.lastMessage || "(aucun message)"}</small> <br/>

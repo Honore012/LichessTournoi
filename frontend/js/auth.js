@@ -5,15 +5,14 @@ import {
   signInWithPopup,
   sendPasswordResetEmail,
   onAuthStateChanged,
-  sendEmailVerification // <<< Ajouté ici
+  sendEmailVerification
 } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-auth.js";
 
 import {
   doc,
   setDoc,
   getDoc,
-  updateDoc,
-  getFirestore
+  updateDoc
 } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js";
 
 // Connexion d'un utilisateur via email et mot de passe
@@ -49,12 +48,26 @@ export function googleSignIn() {
     });
 }
 
-// Inscription d’un nouvel utilisateur + envoi du lien de confirmation
-export function registerUser(email, password) {
+// Inscription d’un nouvel utilisateur + enregistrement username
+export function registerUser(email, password, username) {
   return createUserWithEmailAndPassword(auth, email, password)
     .then(async (userCredential) => {
       const user = userCredential.user;
-      await sendEmailVerification(user); // <<< Envoie l’email de vérification
+      await sendEmailVerification(user);
+
+      // Enregistre aussi username au moment de la création
+      const userRef = doc(db, "users", user.uid);
+      await setDoc(userRef, {
+        uid: user.uid,
+        username: username,
+        email: user.email,
+        gamesPlayed: 0,
+        wins: 0,
+        losses: 0,
+        elo: 1500,
+        online: true
+      }, { merge: true });
+
       alert("Un lien de confirmation a été envoyé à votre adresse email.");
       return user.getIdToken(true);
     })
@@ -84,13 +97,7 @@ onAuthStateChanged(auth, async (user) => {
     const userRef = doc(db, "users", user.uid);
     const userSnap = await getDoc(userRef);
 
-    if (!userSnap.exists()) {
-      await setDoc(userRef, {
-        uid: user.uid,
-        email: user.email,
-        online: true
-      });
-    } else {
+    if (userSnap.exists()) {
       await updateDoc(userRef, {
         online: true
       });

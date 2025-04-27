@@ -131,3 +131,11 @@ button:hover {
     padding: 10px;
   }
 }
+.online-dot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  background-color: #4CAF50; /* vert */
+  border-radius: 50%;
+  margin-left: 8px;
+}
