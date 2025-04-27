@@ -1,0 +1,172 @@
+@font-face {
+  font-family: 'Great Day';
+  src: url('./fonts/Great Day Personal Use.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Great Day Bold';
+  src: url('./fonts/Great Day bold Personal Use.ttf') format('truetype');
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  background: linear-gradient(to right, #f8f8f8, #eaeaea);
+  color: #333;
+  text-align: center;
+  padding: 0px;
+}
+
+/* Header avec fond et flou stylisé */
+header {
+  position: relative;
+  background-image: url('../images/logo.jpg');
+  background-size: cover;
+  background-position: center;
+  height: 180px;
+  width: 105%;
+  overflow: hidden;
+  color: white;
+  margin-left: -20px;
+}
+
+.header-blur {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.1);
+  z-index: 1;
+}
+
+@keyframes headerSlide {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes blink {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+.header-content {
+  position: relative;
+  z-index: 2;
+  padding-top: 40px;
+}
+header h1 {
+  font-family: 'Great Day', cursive;
+  font-size: 2.4rem;
+  color: #ffcc00;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
+}
+
+/* Section d'intro */
+.intro {
+  margin: 50px auto;
+  padding: 20px;
+  max-width: 500px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.intro h2 {
+  font-size: 1.4rem;
+  color: #222;
+  margin-bottom: 10px;
+}
+
+.intro p {
+  font-size: 15px;
+  color: #555;
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-12px);
+  }
+}
+
+/* Bouton principal */
+.btn {
+  display: inline-block;
+  padding: 10px 25px;
+  background: #ff9900;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  text-decoration: none;
+  border-radius: 8px;
+  margin-top: -10px;
+  transition: background 0.3s ease;
+  
+  animation: bounce 1s infinite;
+}
+
+.btn:hover {
+  background: #e68a00;
+}
+
+/* Pied de page */
+footer {
+  background: #222;
+  color: white;
+  padding: 5px;
+  margin-top: 10px;
+  border-top: 4px solid #ff9900;
+  width: 105%;
+  height: 190px;
+  margin-left: -20px;
+}
+
+footer a {
+  color: #ff9900;
+  text-decoration: none;
+  margin: 0 8px;
+}
+
+footer a:hover {
+  text-decoration: underline;
+}
+
+/* Icônes des réseaux sociaux */
+.social-icons {
+  margin: 15px 0;
+}
+
+.social-icons a img {
+  width: 24px;
+  margin: 0 6px;
+  transition: transform 0.3s ease;
+}
+
+.social-icons a img:hover {
+  transform: scale(1.2);
+}
+
+/* Infos PDG */
+.pdg-info {
+  font-family: 'Great Day', cursive;
+  font-size: 14px;
+  font-weight: bold;
+  color: #007bff;
+  margin-top: 10px;
+}

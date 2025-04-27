@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Connexion - LichessTournoi</title>
+  <link rel="stylesheet" href="css/style2.css" />         <link rel="stylesheet" href="css/auth.css" />
+</head>                                                 <body>
+
+  <header>
+    <h1>Se connecter à LichessTournoi</h1>
+  </header>
+
+  <div class="login-container">
+    <form id="loginForm">
+      <div class="form-group">
+        <label for="email">Email :</label>
+        <input type="email" id="email" placeholder="Entrez votre email" required />
+      </div>
+                                                              <div class="form-group">
+        <label for="password">Mot de passe :</label>            <input type="password" id="password" placeholder="Entrez votre mot de passe" required />
+      </div>
+
+      <button type="submit">Se connecter</button>
+    </form>
+
+    <p>Ou</p>
+    <button id="googleLoginBtn">Connexion avec Google</button>
+
+    <p>Pas encore de compte ? <a href="register.html">Inscrivez-vous ici</a></p>
+    <p><a href="reset-password.html">Mot de passe oublié ?</a></p>
+
+    <div id="loginMessage"></div>
+  </div>
+
+  <!-- Scripts -->
+  <script type="module" src="js/firebase-init.js"></script>
+  <script type="module" src="js/login.js"></script>
+</body>
+</html>

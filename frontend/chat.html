@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chat avec Admin</title>
+  <link rel="stylesheet" href="./css/chat.css" />
+</head>
+<body>
+  <div class="chat-container">
+    <h2>Chat avec l'administrateur</h2>
+    <div id="messages" class="messages"></div>
+
+    <form id="chatForm" autocomplete="off">
+      <input type="text" id="messageInput" placeholder="Tape ton message..." required />
+      <button type="submit">Envoyer</button>
+    </form>
+  </div>
+
+  <script type="module" src="./js/chat.js"></script>
+</body>
+</html>

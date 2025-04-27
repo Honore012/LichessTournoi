@@ -1,0 +1,113 @@
+@import url('https://fonts.googleapis.com/css2?family=Great+Day:wght@700&display=swap');
+
+body {
+  font-family: 'Great Day', cursive;
+  padding: 1rem;
+  background-color: #f9f9f9;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+#messages {
+  max-height: 400px;
+  overflow-y: auto;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Message bubble */
+.message {
+  max-width: 80%;
+  padding: 10px 15px;
+  border-radius: 20px;
+  font-size: 1.1rem;
+  line-height: 1.4;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+  word-break: break-word;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Nom d'utilisateur */
+.username {
+  font-size: 0.5rem;
+  font-weight: bold;
+  color: #00c853;
+  margin-bottom: 5px;
+}
+
+/* Messages envoyés par l'utilisateur actuel */
+.sent {
+  align-self: flex-end;
+  background-color: #dcf8c6;
+  border-radius: 20px 20px 0 20px;
+}
+
+/* Messages reçus */
+.received {
+  align-self: flex-start;
+  background-color: #87cefa;
+  border-radius: 20px 20px 20px 0;
+}
+
+/* Messages envoyés par l'admin */
+.admin-message {
+  align-self: flex-end;
+  background-color: #e3b7ff;
+  border-radius: 20px 20px 0 20px;
+  font-style: italic;
+  font-weight: bold;
+}
+
+/* Formulaire de message */
+#chatForm {
+  display: flex;
+  gap: 10px;
+}
+
+#messageInput {
+  flex: 1;
+  padding: 10px;
+  border-radius: 20px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+}
+
+button[type="submit"] {
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+button[type="submit"]:hover {
+  background-color: #45a049;
+}
+
+/* Heure + Badge "Moi" alignés */
+.time-badge-container {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.6rem;
+  margin-top: 5px;
+}
+
+.time-badge-container .timestamp {
+  color: #888;
+}
+
+.time-badge-container .badge-moi {
+  color: #4caf50;
+  font-weight: bold;
+}

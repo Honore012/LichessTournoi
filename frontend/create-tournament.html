@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Créer un tournoi Lichess</title>
+  <link rel="stylesheet" href="css/create-tournament.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Créer un tournoi Lichess</h1>
+
+    <form id="tournamentForm">
+      <label>Nom du tournoi :
+        <input type="text" name="name" required>
+      </label><br>
+
+      <label>Temps de la montre (minutes) :
+        <input type="number" name="clockTime" value="5" min="1" required>
+      </label><br>
+
+      <label>Incrément (secondes) :
+        <input type="number" name="clockIncrement" value="0" min="0" required>
+      </label><br>
+
+      <label>Durée du tournoi (minutes) :
+        <select name="minutes" required>
+          <option value="30">30</option>
+          <option value="60">60</option>
+          <option value="90">90</option>
+          <option value="120">120</option>
+          <option value="180">180</option>
+          <option value="300">300</option>                        <option value="600">600</option>                      </select>
+      </label><br>
+                                                              <label>Variante :
+        <select name="variant">
+          <option value="standard">Standard</option>
+          <option value="chess960">Chess960</option>
+          <option value="crazyhouse">Crazyhouse</option>          <option value="antichess">Antichess</option>
+          <option value="atomic">Atomic</option>
+          <option value="horde">Horde</option>                    <option value="kingOfTheHill">King of the Hill</option>
+          <option value="threeCheck">Three-Check</option>                                                                 <option value="racingKings">Racing Kings</option>
+        </select>
+      </label><br><br>
+                                                                <label>Mot de passe du tournoi :
+  <input type="text" name="password" required>
+</label><br>                                                                                                       <!-- Boutons de connexion et de création -->
+      <button id="loginButton">Se connecter avec Google</button>                                                      <button id="createTournamentButton" disabled>Créer un tournoi</button>
+    </form>
+
+    <div id="resultat"></div>                             </div>
+
+  <!-- Inclus le fichier JavaScript contenant la logique -->                                                      
+<script type="module" src="js/create-tournament.js"></script>
+</body>                                                 
+</html>

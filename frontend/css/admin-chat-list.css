@@ -1,0 +1,68 @@
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f3f4f6;
+  margin: 0;
+  padding: 2rem;
+  color: #111827;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 2rem;
+  color: #1f2937;
+}
+
+#userList {
+  width: 100%;  /* Utilisation de la largeur totale de l'écran */
+  margin: 0 auto;
+  padding: 0 1rem; /* Ajoute un peu de padding sur les côtés pour éviter que les éléments soient collés aux bords */
+}
+
+#userList div {
+  background-color: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  transition: box-shadow 0.2s;
+}
+
+#userList div:hover {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+strong {
+  font-size: 1.1rem;
+  color: #111827;
+}
+
+small {
+  color: #6b7280;
+}
+
+button {
+  margin-top: 0.5rem;
+  background-color: #3b82f6;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+button:hover {
+  background-color: #2563eb;
+}
+
+.badge {
+  background-color: #ef4444;
+  color: white;
+  font-size: 0.75rem;
+  font-weight: bold;
+  padding: 2px 6px;
+  border-radius: 9999px;
+  margin-left: 8px;
+  vertical-align: middle;
+}

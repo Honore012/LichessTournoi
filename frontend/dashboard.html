@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard - LichessTournoi</title>
+  <link href="https://fonts.googleapis.com/css2?family=Alegreya+SC&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body>
+
+  <!-- Bouton Menu -->
+  <div class="menu-btn" onclick="toggleMenu()">
+    <div></div>
+    <div></div>
+    <div></div>
+  </div>
+
+  <!-- Menu Latéral -->
+  <div class="sidebar" id="sidebar">
+    <a href="chat.html"><i class="fas fa-envelope"></i> Message Privé</a>
+    <a href="create-tournament.html"><i class="fas fa-tools"></i> Création du Tournoi</a>
+    <a href="tournaments.html"><i class="fas fa-trophy"></i> Tournoi</a>
+    <a href="aide.html"><i class="fas fa-question-circle"></i> Aide</a>
+
+    <!-- Lien vers la boîte de réception admin (affiché uniquement pour l’admin) -->
+    <a href="admin-chat-list.html" id="adminInboxLink" style="display: none;">
+      <i class="fas fa-inbox"></i> Boîte de Réception Admin
+    </a>
+
+    <a href="#" id="logout-btn"><i class="fas fa-sign-out-alt"></i> Déconnexion</a>
+  </div>
+
+  <!-- Contenu Principal -->
+  <div class="content">
+    <h1>Bienvenue sur votre Dashboard</h1>
+
+    <!-- Informations du Compte -->
+    <h2>Informations du Compte</h2>
+    <table>
+      <tr><th>ID</th><td id="userId">Chargement...</td></tr>
+      <tr><th>Email</th><td id="userEmail">Chargement...</td></tr>
+      <tr><th>Nom d'utilisateur</th><td id="username">Chargement...</td></tr>
+    </table>
+
+    <!-- Statistiques -->
+    <h2>Statistiques</h2>
+    <table>
+      <tr><th>Parties Jouées</th><td id="gamesPlayed">0</td></tr>
+      <tr><th>Victoires</th><td id="wins">0</td></tr>
+      <tr><th>Défaites</th><td id="losses">0</td></tr>
+      <tr><th>Elo</th><td id="elo">1500</td></tr>
+    </table>
+  </div>
+
+  <audio id="menuSound" src="sounds/Menu.wav" preload="auto"></audio>
+
+  <!-- Script pour afficher le lien admin si email correspond -->
+  <script type="module">
+    import { auth } from "./js/firebase-init.js";
+    import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-auth.js";
+
+    const ADMIN_EMAIL = "tongalazahonoricque@gmail.com";
+    const inboxLink = document.getElementById("adminInboxLink");
+
+    onAuthStateChanged(auth, (user) => {
+      if (user && user.email === ADMIN_EMAIL) {
+        inboxLink.style.display = "block";
+      }
+    });
+  </script>
+
+  <script type="module" src="js/dashboard.js"></script>
+</body>
+</html>

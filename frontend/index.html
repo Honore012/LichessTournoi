@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LichessTournoi - Page d'Accueil</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- En-tête -->
+<header>
+  <div class="header-blur"></div>
+  <div class="header-content">
+    <h1>Tournoi lichess avec</h1>
+    <h1>prix litecoin💰</h1>
+  </div>
+</header>
+
+<!-- Contenu principal -->
+<main>
+  <section class="intro">
+    <h2>Rejoignez des tournois d'échecs excitants et gagnez des récompenses en LTC !</h2>
+    <p>Notre plateforme vous permet de participer à des tournois en ligne avec des joueurs du monde entier. Inscrivez-vous maintenant et commencez à jouer !</p>
+  </section>
+
+  <!-- Bouton Rejoindre -->
+  <section class="join-section">
+    <a href="login.html" class="btn">Rejoindre</a>
+  </section>
+</main>
+
+<!-- Pied de page -->
+<footer>
+  <p>© LichessTournoi 2025</p>
+  <p>
+    <a href="#">Conditions Générales d'Utilisation</a> -
+    <a href="#">Mentions légales</a> -
+    <a href="#">Politique de confidentialité</a>
+  </p>
+
+  <!-- Icônes des réseaux sociaux -->
+  <div class="social-icons">
+    <a href="#"><img src="images/facebook.png" alt="Facebook"></a>
+    <a href="#"><img src="images/twitter.png" alt="Twitter"></a>
+    <a href="#"><img src="images/gmail.png" alt="Gmail"></a>
+    <a href="#"><img src="images/discord.png" alt="Discord"></a>
+    <a href="#"><img src="images/telegram.png" alt="Telegram"></a>
+  </div>
+  <p class="pdg-info">pdg : Rakotoarinosy Honoré</p>
+  <p>Site en phase Bêta 1.0.0</p>
+</footer>
+
+<!-- Scripts -->
+<script type="module" src="js/firebase-init.js"></script>
+<script>
+  const header = document.querySelector('.header-content');
+
+  function startCycle() {
+    header.style.animation = 'headerSlide 3s ease-out forwards';
+    setTimeout(() => {
+      header.style.animation = 'blink 0.7s step-start 4';
+    }, 2000);
+    setTimeout(() => {
+      header.style.animation = '';
+      startCycle();
+    }, 4100);
+  }
+
+  startCycle();
+</script>
+
+</body>
+</html>

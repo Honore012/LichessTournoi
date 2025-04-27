@@ -1,0 +1,33 @@
+@font-face {
+    font-family: 'Great Day Bold';
+    src: url('fonts/Great Day Personal Use.ttf') format('truetype');
+}
+
+header h1 {
+    font-family: 'Great Day', cursive;
+    font-size: 2.3rem;
+    margin: 60px;
+    color: #50C878;
+}
+/* Réinitialisation des marges et paddings */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+/* Style général */
+body {
+    background-color: #f4f4f4;
+    color: #333;
+    text-align: center;
+    padding: 20px;
+}
+
+/* En-tête */
+header h1 {
+    font-size: 2rem;
+    margin: 60px;
+    color: #50C878;
+}
