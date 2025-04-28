@@ -8,7 +8,6 @@
 <body>
   <div class="container">
     <h1>Créer un tournoi Lichess</h1>
-
     <form id="tournamentForm">
       <label>Nom du tournoi :
         <input type="text" name="name" required>
@@ -29,27 +28,41 @@
           <option value="90">90</option>
           <option value="120">120</option>
           <option value="180">180</option>
-          <option value="300">300</option>                        <option value="600">600</option>                      </select>
+          <option value="300">300</option>
+          <option value="600">600</option>
+        </select>
       </label><br>
-                                                              <label>Variante :
+
+      <label>Variante :
         <select name="variant">
           <option value="standard">Standard</option>
           <option value="chess960">Chess960</option>
-          <option value="crazyhouse">Crazyhouse</option>          <option value="antichess">Antichess</option>
+          <option value="crazyhouse">Crazyhouse</option>
+          <option value="antichess">Antichess</option>
           <option value="atomic">Atomic</option>
-          <option value="horde">Horde</option>                    <option value="kingOfTheHill">King of the Hill</option>
-          <option value="threeCheck">Three-Check</option>                                                                 <option value="racingKings">Racing Kings</option>
+          <option value="horde">Horde</option>
+          <option value="kingOfTheHill">King of the Hill</option>
+          <option value="threeCheck">Three-Check</option>
+          <option value="racingKings">Racing Kings</option>
         </select>
       </label><br><br>
-                                                                <label>Mot de passe du tournoi :
-  <input type="text" name="password" required>
-</label><br>                                                                                                       <!-- Boutons de connexion et de création -->
-      <button id="loginButton">Se connecter avec Google</button>                                                      <button id="createTournamentButton" disabled>Créer un tournoi</button>
+
+      <label>Mot de passe du tournoi :
+        <input type="text" name="password" required>
+      </label><br>
+
+      <!-- Boutons de connexion et de création -->
+      <button id="loginButton">Se connecter avec Google</button>
+      <button id="createTournamentButton" disabled>Créer un tournoi</button>
     </form>
 
-    <div id="resultat"></div>                             </div>
+    <div id="resultat"></div>
+  </div>
 
-  <!-- Inclus le fichier JavaScript contenant la logique -->                                                      
-<script type="module" src="js/create-tournament.js"></script>
-</body>                                                 
+  <!-- Charger SweetAlert2 avant ton JS -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+  <!-- Ton JS principal -->
+  <script type="module" src="js/create-tournament.js"></script>
+</body>
 </html>

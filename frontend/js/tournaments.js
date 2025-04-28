@@ -11,7 +11,7 @@ import {
 
 const auth = getAuth();
 const listContainer = document.getElementById("tournamentList");
-const PARTICIPATION_AMOUNT_LTC = 0.001;
+const PARTICIPATION_AMOUNT_LTC = 0.0001;
 const BACKEND_URL = "https://lichesstournoi-backend.onrender.com";  // Remplacer par l'URL de ton backend de production
 
 async function afficherTournois() {
@@ -91,7 +91,12 @@ async function afficherTournois() {
 
         const user = auth.currentUser;
         if (!user) {
-          alert("Vous devez être connecté pour rejoindre un tournoi.");
+          Swal.fire({
+            title: "Erreur",
+            text: "Vous devez être connecté pour rejoindre un tournoi.",
+            icon: "error",
+            confirmButtonText: "OK"
+          });
           payButton.disabled = false;
           payButton.textContent = `Payer ${PARTICIPATION_AMOUNT_LTC} LTC pour rejoindre`;
           return;
@@ -116,7 +121,12 @@ async function afficherTournois() {
           }
         } catch (error) {
           console.error("Erreur API paiement :", error);
-          alert("Erreur : " + error.message);
+          Swal.fire({
+            title: "Erreur",
+            text: "Une erreur s'est produite lors du paiement.",
+            icon: "error",
+            confirmButtonText: "OK"
+          });
           payButton.disabled = false;
           payButton.textContent = `Payer ${PARTICIPATION_AMOUNT_LTC} LTC pour rejoindre`;
         }

@@ -8,18 +8,28 @@ document.getElementById("registerForm")?.addEventListener("submit", function(eve
   const username = document.getElementById("username").value.trim();
 
   if (!username || !email || !password) {
-    alert("Veuillez remplir tous les champs.");
+    Swal.fire({
+      icon: 'warning',
+      title: 'Champs manquants',
+      text: 'Veuillez remplir tous les champs.',
+      confirmButtonColor: '#3085d6'
+    });
     return;
   }
 
   registerUser(email, password, username)
     .then((token) => {
       localStorage.setItem('firebase_token', token);
-      alert("Inscription réussie ! Un lien de vérification a été envoyé à votre adresse e-mail.");
+      // Suppression de l'alerte d'inscription réussie
       window.location.href = "../login.html";
     })
     .catch((error) => {
       console.error("Erreur d'inscription :", error);
-      alert("Erreur d'inscription : " + error.message);
+      Swal.fire({
+        icon: 'error',
+        title: 'Erreur d\'inscription',
+        text: error.message,
+        confirmButtonColor: '#d33'
+      });
     });
 });

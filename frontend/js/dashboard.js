@@ -30,7 +30,7 @@ onAuthStateChanged(auth, async (user) => {
   }
 });
 
-// Menu latéral Gestion du menu latéral avec son
+// Menu latéral : Gestion du menu avec son
 window.toggleMenu = function () {
   const sidebar = document.getElementById("sidebar");
   const menuBtn = document.querySelector(".menu-btn");
@@ -46,15 +46,24 @@ window.toggleMenu = function () {
 };
 
 // Déconnexion
-document.getElementById("logout-btn")?.addEventListener("click", function (e) {
+document.getElementById("logout-btn")?.addEventListener("click", async function (e) {
   e.preventDefault();
-  signOut(auth)
-    .then(() => {
-      localStorage.removeItem('firebase_token');
-      alert("Déconnexion réussie.");
-      window.location.href = "login.html";
-    })
-    .catch((error) => {
-      console.error("Erreur lors de la déconnexion :", error.message);
+  try {
+    await signOut(auth);
+    localStorage.removeItem('firebase_token');
+    
+    // Affiche l'alerte SweetAlert2
+    await Swal.fire({
+      icon: 'success',
+      title: 'Déconnexion réussie',
+      text: 'Vous avez été déconnecté avec succès.',
+      timer: 2000, // Temps avant fermeture de l'alerte
+      showConfirmButton: true
     });
+        
+    // Redirection après la fermeture de l'alerte
+    window.location.href = "login.html";
+  } catch (error) {
+    console.error("Erreur lors de la déconnexion :", error.message);
+  }
 });

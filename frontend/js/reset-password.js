@@ -7,10 +7,19 @@ document.getElementById("resetForm")?.addEventListener("submit", function(event)
 
   sendPasswordReset(email)
     .then(() => {
-      alert("Lien de réinitialisation envoyé à votre adresse email.");
-      window.location.href = "/login.html";
+      Swal.fire({
+        icon: 'success',
+        title: 'Lien envoyé',
+        text: 'Un lien de réinitialisation a été envoyé à votre adresse email.',
+      }).then(() => {
+        window.location.href = "/login.html";
+      });
     })
     .catch((error) => {
-      alert("Erreur : " + error.message);
+      Swal.fire({
+        icon: 'error',
+        title: 'Erreur',
+        text: error.message,
+      });
     });
 });

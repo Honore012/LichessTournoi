@@ -27,6 +27,11 @@ export function loginUser(email, password) {
     })
     .catch((error) => {
       console.error("Erreur de connexion :", error.message);
+      Swal.fire({
+        icon: 'error',
+        title: 'Erreur de connexion',
+        text: error.message,
+      });
       throw error;
     });
 }
@@ -44,6 +49,11 @@ export function googleSignIn() {
     })
     .catch((error) => {
       console.error("Erreur de connexion avec Google :", error.message);
+      Swal.fire({
+        icon: 'error',
+        title: 'Erreur de connexion',
+        text: error.message,
+      });
       throw error;
     });
 }
@@ -68,11 +78,21 @@ export function registerUser(email, password, username) {
         online: true
       }, { merge: true });
 
-      alert("Un lien de confirmation a été envoyé à votre adresse email.");
+      await Swal.fire({
+        icon: 'success',
+        title: 'Confirmation envoyée',
+        text: 'Un lien de confirmation a été envoyé à votre adresse email.',
+      });
+
       return user.getIdToken(true);
     })
     .catch((error) => {
       console.error("Erreur d'inscription :", error.message);
+      Swal.fire({
+        icon: 'error',
+        title: 'Erreur d\'inscription',
+        text: error.message,
+      });
       throw error;
     });
 }

@@ -1,3 +1,4 @@
+// Ne surtout pas importer Swal ici !
 import { auth } from "./firebase-init.js";
 import {
   onAuthStateChanged,
@@ -5,6 +6,7 @@ import {
   GoogleAuthProvider
 } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-auth.js";
 
+// Sélection des éléments du DOM
 const loginButton = document.getElementById("loginButton");
 const createButton = document.getElementById("createTournamentButton");
 const form = document.getElementById("tournamentForm");
@@ -23,7 +25,11 @@ loginButton.addEventListener("click", async (e) => {
       await signInWithPopup(auth, provider);
     }
   } catch (error) {
-    alert("Erreur de connexion : " + error.message);
+    Swal.fire({
+      icon: 'error',
+      title: 'Erreur de connexion',
+      text: error.message
+    });
   } finally {
     loginButton.disabled = false;
   }
@@ -36,8 +42,13 @@ onAuthStateChanged(auth, (user) => {
       createButton.disabled = false;
       loginButton.textContent = "Connecté : " + user.email;
     } else {
+      createButton.disabled = true;
       loginButton.textContent = "Non autorisé";
-      alert("Seul l'administrateur peut créer des tournois.");
+      Swal.fire({
+        icon: 'warning',
+        title: 'Accès refusé',
+        text: "Seul l'administrateur peut créer des tournois."
+      });
     }
   } else {
     createButton.disabled = true;
@@ -48,9 +59,13 @@ onAuthStateChanged(auth, (user) => {
 // Création tournoi via le backend
 form.addEventListener("submit", async (e) => {
   e.preventDefault();
-  
+
   if (!auth.currentUser || auth.currentUser.email !== ADMIN_EMAIL) {
-    return alert("Action réservée à l'administrateur.");
+    return Swal.fire({
+      icon: 'warning',
+      title: 'Action réservée à l\'administrateur',
+      text: 'Vous devez être administrateur pour créer un tournoi.'
+    });
   }
 
   const formData = new FormData(form);
@@ -89,9 +104,21 @@ form.addEventListener("submit", async (e) => {
         <a href="https://lichess.org/tournament/${tournament.id}" target="_blank">
           ${tournament.fullName}
         </a>
-      </p>`;
+      </p>
+    `;
+
+    Swal.fire({
+      icon: 'success',
+      title: 'Tournoi créé avec succès',
+      text: `Le tournoi ${tournament.fullName} a été créé avec succès !`
+    });
+
   } catch (error) {
-    resultat.textContent = "Erreur : " + error.message;
+    Swal.fire({
+      icon: 'error',
+      title: 'Erreur',
+      text: error.message
+    });
   } finally {
     createButton.disabled = false;
     createButton.textContent = "Créer un tournoi";
