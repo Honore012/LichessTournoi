@@ -11,7 +11,7 @@ import {
 
 const auth = getAuth();
 const listContainer = document.getElementById("tournamentList");
-const PARTICIPATION_AMOUNT_LTC = 0.0001;
+const PARTICIPATION_AMOUNT_LTC = 0.0005;
 const BACKEND_URL = "https://lichesstournoi-backend.onrender.com";  // Remplacer par l'URL de ton backend de production
 
 async function afficherTournois() {
