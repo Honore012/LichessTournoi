@@ -1,3 +1,5 @@
+// backend/routes/tournamentRoutes.js
+
 import express from "express";
 import fetch from "node-fetch";
 import admin from "firebase-admin";
@@ -14,7 +16,20 @@ router.post("/create", verifyFirebaseToken, async (req, res) => {
       return res.status(403).json({ error: "Non autorisé." });
     }
 
-    const { name, clockTime, clockIncrement, minutes, variant, password } = req.body;
+    const {
+      name,
+      clockTime,
+      clockIncrement,
+      minutes,
+      variant,
+      password,
+      startTime
+    } = req.body;
+
+    const startTimeDate = new Date(startTime);
+    const now = new Date();
+    const waitMinutes = Math.max(Math.ceil((startTimeDate - now) / 60000), 0);
+
     const response = await fetch("https://lichess.org/api/tournament", {
       method: "POST",
       headers: {
@@ -22,13 +37,13 @@ router.post("/create", verifyFirebaseToken, async (req, res) => {
         "Content-Type": "application/x-www-form-urlencoded"
       },
       body: new URLSearchParams({
+        name,
         clockTime,
         clockIncrement,
         minutes,
         variant,
-        name,
-        waitMinutes: "60",
-        password
+        password,
+        waitMinutes: waitMinutes.toString()
       })
     });
 
@@ -39,16 +54,20 @@ router.post("/create", verifyFirebaseToken, async (req, res) => {
 
     const tournament = await response.json();
 
+    const startDate = startTimeDate.getTime()
+      ? admin.firestore.Timestamp.fromDate(startTimeDate)
+      : admin.firestore.FieldValue.serverTimestamp();
+
     await db.collection("tournaments").add({
       id: tournament.id,
       name: tournament.fullName,
       lichessUrl: `https://lichess.org/tournament/${tournament.id}`,
-      createdAt: admin.firestore.FieldValue.serverTimestamp(),
+      startDate,
       minutes,
       clockTime,
       clockIncrement,
       variant,
-      password, // enregistré pour vérification future
+      password,
       createdBy: userEmail,
       status: "en attente"
     });
@@ -57,6 +76,20 @@ router.post("/create", verifyFirebaseToken, async (req, res) => {
 
   } catch (err) {
     console.error("Erreur création tournoi :", err);
+    res.status(500).json({ error: "Erreur serveur" });
+  }
+});
+
+router.get("/", async (req, res) => {
+  try {
+    const snapshot = await db.collection("tournaments").orderBy("startDate", "desc").get();
+    const tournaments = snapshot.docs.map(doc => ({
+      ...doc.data(),
+      startDate: doc.data().startDate.toDate()
+    }));
+    res.json(tournaments);
+  } catch (err) {
+    console.error("Erreur récupération tournois :", err);
     res.status(500).json({ error: "Erreur serveur" });
   }
 });

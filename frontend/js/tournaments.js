@@ -12,7 +12,7 @@ import {
 const auth = getAuth();
 const listContainer = document.getElementById("tournamentList");
 const PARTICIPATION_AMOUNT_LTC = 0.001;
-const BACKEND_URL = "https://lichesstournoi-backend.onrender.com";  // Remplacer par l'URL de ton backend de production
+const BACKEND_URL = "https://lichesstournoi-backend.onrender.com";
 
 async function afficherTournois() {
   try {
@@ -27,10 +27,10 @@ async function afficherTournois() {
     snapshot.forEach(async (docSnap) => {
       const tournoi = docSnap.data();
       const docId = docSnap.id;
-      const createdAt = tournoi.createdAt?.toDate();
-      if (!createdAt) return;
 
-      const startTime = createdAt.getTime() + 60 * 60 * 1000;
+      const startTime = tournoi.startDate?.toDate().getTime();
+      if (!startTime) return;
+
       const endTime = startTime + tournoi.minutes * 60 * 1000;
       const deleteTime = endTime + 60 * 60 * 1000;
       const now = Date.now();
@@ -56,22 +56,39 @@ async function afficherTournois() {
       const countdownElement = document.createElement("p");
 
       const updateCountdown = () => {
-        const timeLeft = startTime - Date.now();
-        if (timeLeft <= 0) {
-          countdownElement.textContent = "Le tournoi a commencé !";
-          clearInterval(intervalId);
-          return;
-        }
-        const minutes = Math.floor(timeLeft / 60000);
-        const seconds = Math.floor((timeLeft % 60000) / 1000);
-        countdownElement.textContent = `Démarre dans : ${minutes}m ${seconds}s`;
-      };
+  const timeLeft = startTime - Date.now();
+  if (timeLeft <= 0) {
+    countdownElement.textContent = "Le tournoi a commencé !";
+    clearInterval(intervalId);
+    return;
+  }
+
+  const totalSeconds = Math.floor(timeLeft / 1000);
+  const days = Math.floor(totalSeconds / 86400);
+  const hours = Math.floor((totalSeconds % 86400) / 3600);
+  const minutes = Math.floor((totalSeconds % 3600) / 60);
+  const seconds = totalSeconds % 60;
+
+  let formatted = "Démarre dans : ";
+  if (days > 0) formatted += `${days}j `;
+  if (hours > 0 || days > 0) formatted += `${hours}h `;
+  if (minutes > 0 || hours > 0 || days > 0) formatted += `${minutes}m `;
+  formatted += `${seconds}s`;
+
+  countdownElement.textContent = formatted;
+};
 
       const intervalId = setInterval(updateCountdown, 1000);
       updateCountdown();
 
+      const dateString = new Date(startTime).toLocaleString("fr-FR", {
+        dateStyle: "full",
+        timeStyle: "short"
+      });
+
       div.innerHTML = `
         <h3>${tournoi.name}</h3>
+        <p><strong>Date de début :</strong> ${dateString}</p>
         <p><strong>Durée :</strong> ${tournoi.minutes} min</p>
         <p><strong>Cadence :</strong> ${tournoi.clockTime}+${tournoi.clockIncrement}</p>
         <p><strong>Variante :</strong> ${tournoi.variant}</p>

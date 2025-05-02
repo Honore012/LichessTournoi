@@ -45,13 +45,16 @@
           <option value="threeCheck">Three-Check</option>
           <option value="racingKings">Racing Kings</option>
         </select>
-      </label><br><br>
+      </label><br>
+
+      <label>Début du tournoi :
+        <input type="datetime-local" name="startTime" required>
+      </label><br>
 
       <label>Mot de passe du tournoi :
         <input type="text" name="password" required>
-      </label><br>
+      </label><br><br>
 
-      <!-- Boutons de connexion et de création -->
       <button id="loginButton">Se connecter avec Google</button>
       <button id="createTournamentButton" disabled>Créer un tournoi</button>
     </form>
@@ -59,10 +62,7 @@
     <div id="resultat"></div>
   </div>
 
-  <!-- Charger SweetAlert2 avant ton JS -->
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
-  <!-- Ton JS principal -->
   <script type="module" src="js/create-tournament.js"></script>
 </body>
 </html>

@@ -35,7 +35,7 @@ loginButton.addEventListener("click", async (e) => {
   }
 });
 
-// Contrôle d’accès - onAuthStateChanged pour gérer la connexion/déconnexion
+// Contrôle d’accès
 onAuthStateChanged(auth, (user) => {
   if (user) {
     if (user.email === ADMIN_EMAIL) {
@@ -56,7 +56,7 @@ onAuthStateChanged(auth, (user) => {
   }
 });
 
-// Création tournoi via le backend
+// Création du tournoi
 form.addEventListener("submit", async (e) => {
   e.preventDefault();
 
@@ -69,16 +69,19 @@ form.addEventListener("submit", async (e) => {
   }
 
   const formData = new FormData(form);
+  const startTimeStr = formData.get("startTime");
+  const startTime = new Date(startTimeStr);
+
   const data = {
     name: formData.get("name"),
     clockTime: formData.get("clockTime"),
     clockIncrement: formData.get("clockIncrement"),
     minutes: formData.get("minutes"),
     variant: formData.get("variant"),
-    password: formData.get("password")
+    password: formData.get("password"),
+    startTime: startTime.toISOString()
   };
 
-  // Indicateur de chargement
   createButton.disabled = true;
   createButton.textContent = "Création en cours...";
 
