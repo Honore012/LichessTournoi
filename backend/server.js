@@ -3,6 +3,7 @@ import cors from "cors";
 import dotenv from "dotenv";
 import path from "path";
 import { fileURLToPath } from "url";
+import bodyParser from "body-parser";
 
 dotenv.config();
 const app = express();
@@ -11,13 +12,19 @@ const app = express();
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// Middlewares
+// Middlewares globaux
 app.use(cors());
 app.use(express.json());
 
 // Servir les fichiers statiques du frontend
 const frontendPath = path.join(__dirname, '../frontend');
 app.use(express.static(frontendPath));
+
+// Corriger le MIME type pour le CSS
+app.get('/styles.css', (req, res) => {
+  res.type('text/css');
+  res.sendFile(path.join(frontendPath, 'styles.css'));
+});
 
 // Routes API
 import authRoutes from './routes/authRoutes.js';
@@ -28,6 +35,9 @@ import ipnRoutes from './routes/ipn.js';
 app.use('/api', authRoutes);
 app.use('/api/tournaments', tournamentRoutes);
 app.use('/api/payments', paymentsRoutes);
+
+// IPN NOWPayments : attention à bien parser en JSON
+app.use('/api/nowpayments/ipn', bodyParser.json());
 app.use('/api/nowpayments/ipn', ipnRoutes);
 
 // Route spéciale pour afficher la page des tournois
