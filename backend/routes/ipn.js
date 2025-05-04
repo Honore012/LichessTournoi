@@ -26,10 +26,9 @@ router.post('/', express.json({ verify: (req, res, buf) => { req.rawBody = buf.t
     try {
       // Mise à jour Firestore - collection des participants
       await db.collection('tournamentParticipants').doc(docId).set({
-        email,
-        tournamentId,
-        hasPaid: true,
-        paidAt: new Date()
+  hasPaid: true,
+  paidAt: new Date()
+}, { merge: true
       });
 
       // Facultatif : mise à jour du tournoi si tu stockes les participants là aussi
