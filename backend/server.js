@@ -8,7 +8,7 @@ import bodyParser from "body-parser";
 dotenv.config();
 const app = express();
 
-// Résolution du chemin pour __dirname dans les modules ES
+// Résolution du chemin pour __dirname
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
@@ -36,16 +36,16 @@ app.use('/api', authRoutes);
 app.use('/api/tournaments', tournamentRoutes);
 app.use('/api/payments', paymentsRoutes);
 
-// IPN NOWPayments : attention à bien parser en JSON
-app.use('/api/nowpayments/ipn', bodyParser.json());
-app.use('/api/nowpayments/ipn', ipnRoutes);
+// IPN NOWPayments (corrigé pour matcher /api/ipn)
+app.use('/api/ipn', bodyParser.json());
+app.use('/api/ipn', ipnRoutes);
 
-// Route spéciale pour afficher la page des tournois
+// Route spéciale pour les tournois
 app.get('/tournaments', (req, res) => {
   res.sendFile(path.join(frontendPath, 'tournaments.html'));
 });
 
-// Route de base (accueil)
+// Accueil
 app.get('/', (req, res) => {
   res.send('Bienvenue sur le backend LichessTournoi !');
 });
