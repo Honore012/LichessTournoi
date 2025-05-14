@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "raw-body": "^3.0.0"
+  }
+}
