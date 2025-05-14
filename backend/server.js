@@ -14,7 +14,7 @@ const __dirname = path.dirname(__filename);
 
 // Middlewares globaux
 app.use(cors());
-app.use(express.json());
+app.use(express.json()); // OK pour les routes standards
 
 // Servir les fichiers statiques du frontend
 const frontendPath = path.join(__dirname, '../frontend');
@@ -36,8 +36,7 @@ app.use('/api', authRoutes);
 app.use('/api/tournaments', tournamentRoutes);
 app.use('/api/payments', paymentsRoutes);
 
-// IPN NOWPayments (corrigé pour matcher /api/ipn)
-app.use('/api/ipn', bodyParser.json());
+// IPN route - ne pas utiliser bodyParser ici, déjà géré dans ipn.js
 app.use('/api/ipn', ipnRoutes);
 
 // Route spéciale pour les tournois
