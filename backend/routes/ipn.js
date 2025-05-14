@@ -10,7 +10,7 @@ router.post('/', async (req, res) => {
   try {
     const rawBody = await getRawBody(req);
     const receivedSig = req.headers['x-nowpayments-sig'];
-    
+
     const expectedSig = crypto
       .createHmac('sha512', IPN_SECRET)
       .update(rawBody)

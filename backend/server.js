@@ -21,9 +21,9 @@ const frontendPath = path.join(__dirname, '../frontend');
 app.use(express.static(frontendPath));
 
 // Corriger le MIME type pour le CSS
-app.get('/styles.css', (req, res) => {
+app.get('/css/style.css', (req, res) => {
   res.type('text/css');
-  res.sendFile(path.join(frontendPath, 'styles.css'));
+  res.sendFile(path.join(frontendPath, 'css', 'style.css'));
 });
 
 // Routes API
