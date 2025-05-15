@@ -5,8 +5,8 @@ dotenv.config();
 const NOWPAYMENTS_API_KEY = process.env.NOWPAYMENTS_API_KEY;
 const BASE_URL = process.env.BASE_URL;
 
-export const createInvoice = async (order_id, user_email) => {
-  const [tournamentId] = order_id.split('_'); // On extrait le tournoi depuis l'order_id
+export const createInvoice = async (order_id, user_email, idToken) => {
+  const [tournamentId] = order_id.split('_');
 
   try {
     const response = await axios.post(
@@ -19,7 +19,7 @@ export const createInvoice = async (order_id, user_email) => {
         order_id,
         order_description: `Paiement tournoi pour ${user_email}`,
         ipn_callback_url: `${BASE_URL}/api/ipn`,
-        success_url: `${BASE_URL}/tournament-password.html?id=${tournamentId}`,
+        success_url: `${BASE_URL}/tournament-password.html?id=${tournamentId}&token=${idToken}`,
         cancel_url: `${BASE_URL}/tournoi/annule`
       },
       {

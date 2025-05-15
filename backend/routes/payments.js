@@ -17,7 +17,9 @@ router.post('/join', verifyFirebaseToken, async (req, res) => {
       createdAt: new Date()
     });
 
-    const invoiceUrl = await createInvoice(`${tournamentId}_${email}`, email);
+    // Ajout du token Firebase
+    const invoiceUrl = await createInvoice(`${tournamentId}_${email}`, email, req.token);
+
     res.json({ paymentUrl: invoiceUrl });
   } catch (err) {
     console.error('Erreur createInvoice :', err.message);
