@@ -15,6 +15,7 @@ export const createInvoice = async (order_id, user_email) => {
         price_amount: 0.001,
         price_currency: 'ltc',
         pay_currency: 'ltc',
+        is_fixed_rate: true,
         order_id,
         order_description: `Paiement tournoi pour ${user_email}`,
         ipn_callback_url: `${BASE_URL}/api/ipn`,
