@@ -12,7 +12,7 @@ export const createInvoice = async (order_id, user_email, idToken) => {
     const response = await axios.post(
       'https://api.nowpayments.io/v1/invoice',
       {
-        price_amount: 0.001,
+        price_amount: 0.0015,
         price_currency: 'ltc',
         pay_currency: 'ltc',
         order_id,
